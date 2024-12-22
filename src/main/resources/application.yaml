@@ -1,0 +1,26 @@
+server:
+   port: 9191
+
+spring:
+  application:
+    name: blog-application-backend
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: blog-application
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+      timeout: 5000
+  cache:
+    type: redis
+app:
+  jwtSecret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+  jwtExpirationMs: 86400000
+
+logging:
+  level:
+    org.springframework.security: DEBUG
