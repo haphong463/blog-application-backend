@@ -3,7 +3,7 @@
  * @author Phong Ha on 29/11/2024
  */
 
-package com.windev.blog_application_backend.security;
+package com.windev.blog_application_backend.config;
 
 import com.windev.blog_application_backend.security.exception.CustomAccessDeniedHandler;
 import com.windev.blog_application_backend.security.exception.CustomAuthenticationEntryPoint;
@@ -11,6 +11,7 @@ import com.windev.blog_application_backend.security.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -59,8 +60,13 @@ public class SecurityConfig {
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                        authorizationManagerRequestMatcherRegistry.requestMatchers("/api/v1/auth/**").permitAll().
-                                requestMatchers("/api/v1/auth/me").authenticated().anyRequest().authenticated())
+                        authorizationManagerRequestMatcherRegistry
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+                                .requestMatchers("/api/v1/ai/**").permitAll()
+                                .requestMatchers("/api/v1/auth/me").authenticated().anyRequest().authenticated()
+
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         ;
 
