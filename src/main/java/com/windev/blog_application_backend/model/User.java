@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
@@ -35,7 +36,10 @@ public class User {
 
     private Date dob;
 
+//    @DBRef
     private List<String> roles;
+
+    private List<String> articleIds;
 
     @CreatedDate
     private Date createdAt;

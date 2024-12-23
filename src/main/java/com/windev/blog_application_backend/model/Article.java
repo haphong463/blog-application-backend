@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -26,6 +27,8 @@ public class Article {
     private String citation;
     private String content;
     private List<String> tags;
+
+    private ObjectId userId;
 
     @CreatedDate
     private Date createdAt;
