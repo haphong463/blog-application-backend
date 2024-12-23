@@ -23,6 +23,8 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
     private Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(User user) {
@@ -42,6 +44,8 @@ public class CustomUserDetails implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getFirstName(),
+                user.getLastName(),
                 authorities
         );
     }
