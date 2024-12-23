@@ -5,12 +5,13 @@
 
 package com.windev.blog_application_backend.controller;
 
+import com.windev.blog_application_backend.dto.UserDetailsDTO;
 import com.windev.blog_application_backend.model.User;
 import com.windev.blog_application_backend.payload.request.SignInRequest;
 import com.windev.blog_application_backend.payload.request.SignUpRequest;
 import com.windev.blog_application_backend.payload.response.ApiResponse;
 import com.windev.blog_application_backend.security.user_details.CustomUserDetails;
-import com.windev.blog_application_backend.service.AuthService;
+import com.windev.blog_application_backend.service.IAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final IAuthService authService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(IAuthService authService) {
         this.authService = authService;
     }
 
@@ -38,7 +39,7 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<ApiResponse<CustomUserDetails>> currentUser() {
+    public ResponseEntity<ApiResponse<UserDetailsDTO>> currentUser() {
         return new ResponseEntity<>(new ApiResponse<>(authService.currentUser(), HttpStatus.OK.value()), HttpStatus.OK);
     }
 
