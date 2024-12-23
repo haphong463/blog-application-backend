@@ -4,8 +4,8 @@ import com.windev.blog_application_backend.model.Article;
 import com.windev.blog_application_backend.payload.request.ArticleRequest;
 import org.springframework.data.domain.Page;
 
-public interface ArticleService {
-    Page<Article> articlePage(int pageSize, int pageNumber);
+public interface IArticleService {
+    Page<Article> articlePage(int pageSize, int pageNumber, String title);
     Article createArticle(ArticleRequest request);
     void deleteArticle(String id);
     Article updateArticle(String id, ArticleRequest request);
